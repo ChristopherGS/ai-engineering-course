@@ -1,0 +1,18 @@
+{
+    "Insights": {
+        "score": 0.6,
+        "details": {
+            "alignment": null,
+            "inclusion": null,
+            "reason": "Actual output misses some of the key insights from input transcription, such as people believing it's feasible to build up capacity in US and how many monopolies there are"
+        }
+    },
+    "Hallucination": {
+        "score": 0.6341594457626343,
+        "details": {
+            "alignment": null,
+            "inclusion": null,
+            "reason": null
+        }
+    }
+}
