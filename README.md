@@ -1,5 +1,7 @@
 # Welcome to: Building AI Applications with Open-Source Models
 
+Videos explaining how everything works can be found in the [course on gumroad](https://christophergs.gumroad.com/l/texhy).
+
 ## Local Setup
 
 - Ensure you have Python >3.11,<3.12 installed. **Do not use Python 3.12** as 
