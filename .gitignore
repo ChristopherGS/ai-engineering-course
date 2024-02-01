@@ -172,3 +172,6 @@ data/indices/*
 # deepeval
 .deepeval
 temp_test_run_data.json
+
+# course archive
+data/archive

@@ -34,7 +34,7 @@ if __name__ == "__main__":
         model_path=str(DATA_DIR / "tiny_llama_v0.3.gguf"),
         n_ctx=512,
         n_gpu_layers=N_GPU_LAYERS,
-        chat_format="qwen",
+        chat_format="chatml",
     )
     # https://huggingface.co/mistralai/Mixtral-8x7B-Instruct-v0.1
     mixtral_llm = Llama(
@@ -48,7 +48,7 @@ if __name__ == "__main__":
     USER_PROMPTS = [
         "Hello, how are you?",
         "What is the capital of Spain?",
-        "On a scale of 1-10 how good is BladeRunner 2049?",
+        "On a scale of 1-10 how good is Blade Runner 2049?",
     ]
     results = []
     for index, prompt in enumerate(USER_PROMPTS):

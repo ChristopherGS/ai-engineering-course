@@ -35,12 +35,12 @@ def log_wrapped_message(logger, message, line_length=80):
 
 # Load LlamaCPP model
 def load_llm() -> LlamaCPP:
-    model_path = DATA_DIR / "mixtral_8x7b_instruct_v0.1.Q4_K_M.gguf"
+    model_path = DATA_DIR / "mistral-7b-instruct-v0.2.Q4_K_M.gguf"
     return LlamaCPP(
         model_path=str(model_path),
         context_window=4096,
         max_new_tokens=512,
-        model_kwargs={"n_gpu_layers": 12},
+        model_kwargs={"n_gpu_layers": 10},
         verbose=True,
     )
 
@@ -80,7 +80,7 @@ def run_inference(
         return llm.chat(messages=messages)
 
     set_global_tokenizer(
-        AutoTokenizer.from_pretrained("mistralai/Mixtral-8x7B-Instruct-v0.1").encode
+        AutoTokenizer.from_pretrained("mistralai/Mistral-7B-Instruct-v0.2").encode
     )
     service_context = ServiceContext.from_defaults(
         llm=llm,

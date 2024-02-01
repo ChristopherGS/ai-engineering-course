@@ -1,14 +1,14 @@
 {
     "Insights": {
-        "score": 0.6,
+        "score": 0.9,
         "details": {
             "alignment": null,
             "inclusion": null,
-            "reason": "Actual output misses some of the key insights from input transcription, such as people believing it's feasible to build up capacity in US and how many monopolies there are"
+            "reason": "The actual output contains most of the important details from the input transcription except for the mention that 'a lot of people believe that's what will happen'. The output also misses out on the fact that Dylan Patel is a 'very popular' author. These omissions do not significantly affect the overall summary and are not major deviations from the input transcription."
         }
     },
     "Hallucination": {
-        "score": 0.6341594457626343,
+        "score": 0.7558223009109497,
         "details": {
             "alignment": null,
             "inclusion": null,
