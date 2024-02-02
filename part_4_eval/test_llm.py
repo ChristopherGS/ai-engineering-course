@@ -11,7 +11,7 @@ from deepeval.test_case import LLMTestCaseParams
 from llama_cpp import Llama, LlamaGrammar
 
 from part_2_llama_cpp.llm import run_llm
-from shared.settings import DATA_DIR, N_GPU_LAYERS
+from shared.settings import DATA_DIR, N_GPU_LAYERS, MISTRAL_7B_FILE
 
 
 class CustomEvaluationModel(DeepEvalBaseModel):
@@ -41,10 +41,10 @@ class CustomEvaluationModel(DeepEvalBaseModel):
 @pytest.fixture(scope="module")
 def llm() -> Llama:
     return Llama(
-        model_path=str(DATA_DIR / "mixtral_8x7b_instruct_v0.1.Q4_K_M.gguf"),
+        model_path=str(DATA_DIR / MISTRAL_7B_FILE),
         n_ctx=32000,
         n_gpu_layers=N_GPU_LAYERS,
-        chat_format="llama-2",  # this is very close to the mixtral chat format
+        chat_format="mistral-instruct",
     )
 
 
@@ -76,10 +76,10 @@ PROMPT_BASE = (
         (
             PROMPT_BASE,
             "base",
-            "mixtral_8x7b_instruct_v0.1.Q4_K_M.gguf",
-            "llama-2",
-        ),  # Q4
-        # (PROMPT_BASE, "base", "Mixtral_8x7B_Instruct_v0.1.gguf", "llama-2"),
+            MISTRAL_7B_FILE,
+            "mistral-instruct",
+        ),
+        (PROMPT_BASE, "base", MISTRAL_7B_FILE, "llama-2"),
     ],
 )
 def test_insights_case(
@@ -167,8 +167,3 @@ def test_insights_case(
 
     # insights test case fails
     assert_test(test_case, [hallucination_metric, insights_metric])
-
-
-# to use confident-ai:
-# deepeval login (will ask for API key)
-# PYTHONPATH=. deepeval test run part_4_eval/test_llm.py

@@ -1,14 +1,14 @@
 {
     "Insights": {
-        "score": 0.9,
+        "score": 1.0,
         "details": {
             "alignment": null,
             "inclusion": null,
-            "reason": "The actual output contains most of the important details from the input transcription except for the mention that 'a lot of people believe that's what will happen'. The output also misses out on the fact that Dylan Patel is a 'very popular' author. These omissions do not significantly affect the overall summary and are not major deviations from the input transcription."
+            "reason": "The actual_output accurately summarizes the title and key points of the given text."
         }
     },
     "Hallucination": {
-        "score": 0.7558223009109497,
+        "score": 0.9963208436965942,
         "details": {
             "alignment": null,
             "inclusion": null,
