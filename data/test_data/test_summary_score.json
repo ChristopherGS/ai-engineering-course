@@ -1,0 +1,18 @@
+{
+    "Hallucination": {
+        "score": 0.996757447719574,
+        "details": {
+            "alignment": null,
+            "inclusion": null,
+            "reason": null
+        }
+    },
+    "insights": {
+        "score": 0.6,
+        "details": {
+            "alignment": null,
+            "inclusion": null,
+            "reason": "The summary provides essential information but lacks engaging language and storytelling elements."
+        }
+    }
+}

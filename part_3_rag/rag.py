@@ -109,7 +109,7 @@ def main():
         llm=llm, use_rag=False, messages=[system_prompt, user_prompt]
     )
 
-    rag_result = ChatResponse = run_inference(
+    rag_result: ChatResponse = run_inference(
         llm=llm,
         embedding_model=embedding_model,
         use_rag=True,
