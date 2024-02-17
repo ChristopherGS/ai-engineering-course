@@ -1,12 +1,6 @@
-from typing import Generator
+from typing import AsyncGenerator
+from app.db.session import AsyncSessionLocal
 
-from app.db.session import SessionLocal
-
-
-def get_db() -> Generator:
-    db = SessionLocal()
-    db.current_user_id = None
-    try:
+async def get_db() -> AsyncGenerator:
+    async with AsyncSessionLocal() as db:
         yield db
-    finally:
-        db.close()

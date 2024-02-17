@@ -1,12 +1,18 @@
-from sqlalchemy import create_engine
+from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker
 
-SQLALCHEMY_DATABASE_URI = "sqlite:///example.db"
+SQLALCHEMY_DATABASE_URI = "sqlite+aiosqlite:///example.db"
 
-
-engine = create_engine(
+engine = create_async_engine(
     SQLALCHEMY_DATABASE_URI,
-    # required for sqlite
-    connect_args={"check_same_thread": False},
+    # No need for "check_same_thread" in async mode since aiosqlite handles async access
+    echo=True,  # Optional, for debugging
 )
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+# AsyncSession configuration
+AsyncSessionLocal = sessionmaker(
+    expire_on_commit=False,
+    autoflush=False,
+    bind=engine,
+    class_=AsyncSession,
+)
