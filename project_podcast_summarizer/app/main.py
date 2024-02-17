@@ -5,7 +5,7 @@ from typing import Optional, Any
 from pathlib import Path
 from sqlalchemy.orm import Session
 
-from app.schemas.recipe import RecipeSearchResults, Recipe, RecipeCreate
+from app.schemas.podcast import Episode
 from app import deps
 from app import crud
 
@@ -32,61 +32,43 @@ def root(
     """
     Root GET
     """
-    recipes = crud.recipe.get_multi(db=db, limit=10)
+    recipes = crud.podcast.get_multi(db=db, limit=10)
     return TEMPLATES.TemplateResponse(
         "index.html",
         {"request": request, "recipes": recipes},
     )
 
 
-@api_router.get("/recipe/{recipe_id}", status_code=200, response_model=Recipe)
-def fetch_recipe(
+@api_router.get("/episode/{episode_id}", status_code=200, response_model=Episode)
+def fetch_episode(
     *,
-    recipe_id: int,
+    episode_id: int,
     db: Session = Depends(deps.get_db),
 ) -> Any:
     """
-    Fetch a single recipe by ID
+    Fetch a single episode by ID
     """
-    result = crud.recipe.get(db=db, id=recipe_id)
+    result = crud.episode.get(db=db, id=episode_id)
     if not result:
         # the exception is raised, not returned - you will get a validation
         # error otherwise.
         raise HTTPException(
-            status_code=404, detail=f"Recipe with ID {recipe_id} not found"
+            status_code=404, detail=f"Recipe with ID {episode_id} not found"
         )
 
     return result
 
 
-@api_router.get("/search/", status_code=200, response_model=RecipeSearchResults)
-def search_recipes(
-    *,
-    keyword: Optional[str] = Query(None, min_length=3, example="chicken"),
-    max_results: Optional[int] = 10,
-    db: Session = Depends(deps.get_db),
-) -> dict:
-    """
-    Search for recipes based on label keyword
-    """
-    recipes = crud.recipe.get_multi(db=db, limit=max_results)
-    if not keyword:
-        return {"results": recipes}
-
-    results = filter(lambda recipe: keyword.lower() in recipe.label.lower(), recipes)
-    return {"results": list(results)[:max_results]}
-
-
-@api_router.post("/recipe/", status_code=201, response_model=Recipe)
-def create_recipe(
-    *, recipe_in: RecipeCreate, db: Session = Depends(deps.get_db)
-) -> dict:
-    """
-    Create a new recipe in the database.
-    """
-    recipe = crud.recipe.create(db=db, obj_in=recipe_in)
-
-    return recipe
+# @api_router.post("/recipe/", status_code=201, response_model=Recipe)
+# def create_summary(
+#     *, recipe_in: RecipeCreate, db: Session = Depends(deps.get_db)
+# ) -> dict:
+#     """
+#     Create a new recipe in the database.
+#     """
+#     recipe = crud.recipe.create(db=db, obj_in=recipe_in)
+#
+#     return recipe
 
 
 app.include_router(api_router)

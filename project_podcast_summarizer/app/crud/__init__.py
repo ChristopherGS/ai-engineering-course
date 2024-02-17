@@ -1,1 +1,1 @@
-from .crud_recipe import recipe
+from .crud_podcast import podcast, episode, summary
