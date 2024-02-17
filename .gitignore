@@ -175,3 +175,6 @@ temp_test_run_data.json
 
 # course archive
 data/archive
+
+# sqllite
+*.db

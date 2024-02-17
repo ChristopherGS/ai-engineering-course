@@ -1,0 +1,5 @@
+llama-cpp-python==0.2.38
+llama-index==0.9.39
+transformers==4.37.1
+deepeval==0.20.55
+pytest==8.0.0
