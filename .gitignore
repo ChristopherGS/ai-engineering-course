@@ -178,3 +178,6 @@ data/archive
 
 # sqllite
 *.db
+
+# LLMs
+*.gguf
