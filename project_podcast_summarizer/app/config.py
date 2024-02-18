@@ -14,6 +14,8 @@ MODEL_DIR = ROOT / 'data_engineering' / 'models'
 class LLMSettings(BaseSettings):
     CONTEXT_WINDOW: int = 512
     N_GPU_LAYERS: int = 1
+    MAX_TOKENS: int = 256
+    TEMPERATURE: float = 0.7
     MODEL_FILE_NAME: str = "tinyllama-1.1b-chat-v0.3.Q2_K.gguf"  # TODO: update
 
 

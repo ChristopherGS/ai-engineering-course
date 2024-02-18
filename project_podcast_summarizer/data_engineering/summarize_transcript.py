@@ -17,14 +17,14 @@ from app.config import settings
 app = typer.Typer()
 
 def load_system_prompt() -> str:
-    with open(settings.PROMPT_DIR / "summarize_podcast_transcript.md.j2", "r") as file:
+    with open(PROMPT_DIR / "summarize_podcast_transcript.md.j2", "r") as file:
         return file.read()
 
 def prepare_user_prompt(transcript_path: Path) -> str:
     with open(transcript_path, "r") as file:
-        transcript = json.load(file)
+        transcript = file.readlines()
 
-    return json.dumps(transcript)
+    return transcript
 
 
 def load_model(model_path: Path) -> Llama:
@@ -45,20 +45,20 @@ def prepare_output(
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_prompt},
         ],
-        max_tokens=settings.LLM_MAX_TOKENS,
+        max_tokens=settings.llm.MAX_TOKENS,
         stop=[],
-        temperature=settings.TEMPERATURE,
+        temperature=settings.llm.TEMPERATURE,
         grammar=grammar,
     )
 
-def summarize_transcript(transcript: str, llm: Llama) -> None:
-
+def summarize_transcript(transcript_path: Path, llm: Llama) -> None:
     # Load prompt from jinja templates
     system_prompt = load_system_prompt()
-
-    user_prompt = prepare_user_prompt(transcript_path=settings.TRANSCRIPT_DIR / transcript)
-
-    output = prepare_output(llm=llm, system_prompt=system_prompt, user_prompt=user_prompt)
+    user_prompt = prepare_user_prompt(transcript_path=transcript_path)
+    return prepare_output(
+        llm=llm,
+        system_prompt=system_prompt,
+        user_prompt=user_prompt)
 
 
 
@@ -73,6 +73,13 @@ def run_summary_pipeline(
     typer.echo(f"Loading model: {model}")
     llm = load_model(model_path=MODEL_DIR / model)
     typer.echo("Loaded LLM")
+
+    transcript_path = TRANSCRIPT_DIR / transcript_file_name
+    typer.echo(f'Summarizing transcript: {transcript_path}')
+    summary = summarize_transcript(transcript_path=transcript_path, llm=llm)
+    typer.echo(f'Summary prepared: {summary}')
+
+    typer.echo(f'Saving summary to DB')
 
 
 if __name__ == "__main__":
