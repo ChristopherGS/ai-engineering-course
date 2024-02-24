@@ -184,6 +184,7 @@ data/archive
 
 # summaries
 project_podcast_summarizer/data/summaries/*.txt
+project_podcast_summarizer/data/summaries/*.json
 
 # testing
 project_podcast_summarizer/data/transcripts/mini.txt

@@ -1,9 +1,10 @@
+import json
 import logging
 
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 
-from app.config import TRANSCRIPT_DIR
+from app.config import TRANSCRIPT_DIR, SUMMARY_DIR
 from app.db.base_class import Base  # noqa: F401
 from app.models.podcast import Podcast, Episode, Summary
 
@@ -33,11 +34,11 @@ async def update_db(db: AsyncSession) -> None:
     episodes_data = [
         {
             "title": "Finding Leverage by Escaping Functional Fixedness",
-            "summary_file": "finding_leverage_by_escaping_functional_fixedness_summary.txt"
+            "summary_file": "developer_tea_episode_1191_summary.json"
         },
         {
             "title": "9 Years Persistence by Reducing Expectation",
-            "summary_file": "9_years_persistence_by_reducing_expectation_summary.txt"
+            "summary_file": "9_years_persistence_by_reducing_expectation_summary.json"
         },
         # Add more episodes as needed
     ]
@@ -54,18 +55,22 @@ async def update_db(db: AsyncSession) -> None:
             continue  # Skip this episode if summary file can't be read
 
         # Fetch the corresponding episode from the database
-        episode_result = await db.execute(select(Episode).where(Episode.title == entry['title']))
+        episode_result = await db.execute(select(Episode).where(Episode.title == entry['title'], Episode.podcast_id == podcast.id))
         episode = episode_result.scalars().first()
 
         if episode:
-            # Create or update the summary
-            if episode.summary:
-                episode.summary.content = summary_text  # Update the existing summary
+            # This check might cause lazy-loading outside an async context
+            # if episode.summary:
+
+            # Instead, directly check if a summary exists by attempting to fetch it
+            summary_result = await db.execute(select(Summary).where(Summary.episode_id == episode.id))
+            summary = summary_result.scalars().first()
+
+            if summary:
+                summary.content = json.dumps(summary_text)  # Serialize the Python dict to a JSON string
             else:
-                new_summary = Summary(content=summary_text, episode=episode)  # Create a new summary
+                new_summary = Summary(content=summary_text, episode_id=episode.id)
                 db.add(new_summary)
-        else:
-            logger.error(f"Episode not found in database: {entry['title']}")
 
     # Commit the changes to the database
     await db.commit()

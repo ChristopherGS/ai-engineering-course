@@ -1,0 +1,186 @@
+it's a little difficult for me to believe that it's been nine years as of the day that this
+podcast this episode releases it's been nine years since this podcast started and i'm so grateful
+for everything that i've learned on this show by the way i've got a little bit of a cold you might
+be hearing that but i couldn't let this particular date pass without releasing an episode cold or not
+this podcast has meant so much to me uh over the last nine years don't worry i'm not getting ready
+to announce that we're canceling or anything like that i just want to take a moment to reflect
+and say thank you it's very rare that i talk about myself my personal feelings on this show
+at least anything deeper than my opinions but i'm very fulfilled by the opportunity to do this
+podcast and i know the years it has changed and it will continue to change just like i will continue
+to change and that's actually what we're going to talk about after this reflection this moment
+of reflection for me we're going to talk about how you can configure your brain
+for change to invite change but i do want to take a moment and just show my appreciation for all of
+you who are listening right now maybe this is the first time you're listening maybe you've been
+listening for nine years maybe you followed us all the way through when we were a part of the
+spec network maybe you've been with us since the very beginning in our earliest sponsored days
+or throughout all of the many interviews that we've done with the awesome guests whatever
+your journey with developer t has been
+i just want to say that i sincerely appreciate that you're spending a few moments of your life
+listening to me talk on this podcast we may never meet in person some of you i have met
+in person or i've met you virtually online but this is such a meaningful thing to me it's become
+a part of my kind of routine my self-reflection routine so many times something will happen in
+my personal life i'll have some experience or i'll have some insight while i'm just
+hanging out with my family or when i'm exercising or if i'm participating in one of my ridiculously
+long list of uh of hobbies that i have and this show is always in the back of my mind if i have
+an epiphany that i feel like is worth sharing uh it happens in all parts of my life and this truly
+is an extension of who i am so thank you so much uh genuinely from the bottom of my heart
+i've enjoyed doing this so much and i can't wait to do more of it
+i have been asked many times uh either implicitly or explicitly how i've done this show for so long
+how can i keep going for so long and the truth is that i don't feel like i've done the same thing
+for nine years most of the people who listen to the show you might uh perceive that a little bit
+differently because the show in large part when it actually gets delivered uh when you're when
+you're hearing the show you're still hearing the same
+true music as we started with nine years ago right so there are uh not a not a ton has changed about
+this me standing in front of a microphone and sharing my opinions sharing insights from my
+experience in the industry uh you know interviewing other people all of these format things have not
+changed drastically we have had some shifts in topics etc but the way that i interact with
+what i'm doing has changed significantly there have been scheduled changes there have been
+patterns of change there have been changes in the way that i interact with what i'm doing
+there have been patterns of change there have been changes in the way that i interact with what i'm doing
+there have been patterns in my life that i've been able to adjust so that the output of the show
+doesn't really necessarily have to change very much but everything surrounding it can change
+pretty drastically especially my own expectations this is probably the critical factor and the one
+i want to hone in on in this discussion today my expectations for what this show could or should be
+have changed on a very regular basis over the course of my life
+the last nine years and in some ways that affects what i do with the show in terms of the types of
+content that i might produce or the kinds of guests i might have on but the biggest thing
+that it allows me to do is continue regardless of what happens this is the key to persistence at
+least in this particular case the key to persistence for me and i suspect that the key to persistence
+for you may look very similar adjusting your own expectations or a better way to put it is
+reducing the power of your expectations reducing the power of your expectations
+now this sounds like i'm going to go into some kind of like buddhist teaching or something here
+but that's not really the intention the intention is to identify areas where you have an expectation
+of what will occur
+whether it's with a podcast or with your code or with your career with your family or friends
+looking at those expectations and holding them loosely because here's what can happen
+if we build up an expectation if we build up an expectation we begin to wrap our actions
+in our thoughts around that expectation and instead of thinking about the thing that we're
+doing in that moment we're going to be thinking about the thing that we're doing in that moment
+instead of thinking about say the process instead of thinking about writing that particular piece
+of code with quality in mind we start to think about some expectation and by the way expectation
+doesn't necessarily have to be some irrational you know load that you're putting on a situation
+it can be totally rational your expectation of what should happen what is likely to happen what
+could happen all of these things are going to be going to be going to be going to be going to be
+these types of expectations we bring them to the table we begin to wrap all of what we do around
+them and in fact the purpose for the thing that we're doing becomes the expectation
+think about this as it plays out in your normal life or in your life as a software engineer
+let's imagine that you are working your job as a associate software engineer whatever your
+entry-level position or mid-level position software engineer and in no uncertainty
+certain terms you really love your job you enjoy your day-to-day work you enjoy the people you work
+with you enjoy the kind of problems that you're solving you feel sufficiently challenged you feel
+excited but that little expectation starts to grow inside of you the expectation of getting
+a promotion of achieving a particular title or maybe even a salary your work continues you keep
+on enjoying every day that you walk into work but now the expectation is kind of
+living alongside that you know that reviews are around the corner you're going to be either up
+for promotion or not you talk to your manager they put you up for promotion and you get a rejection
+now this expectation that you had has created a differential it's created a picture of something
+that you ostensibly thought would be good for you or would be desirable for you this fork in the road
+but it's
+all a fiction it never actually happened it's just a comparison point that you've created
+uh in your own mind it's all a fiction and so now you're in some kind of suffering
+uh you're experiencing a negative feeling you're experiencing frustration or or maybe you're
+feeling a sense of imposter syndrome maybe you begin to develop resentment towards your manager
+or resentment towards your manager or resentment towards your manager or resentment towards your
+people who uh ultimately made the decision not to promote you and what otherwise was an excellent
+job that you were enjoying yourself you could have continued on the promotion had you not developed
+an expectation a promotion would be a bonus right something that you appreciate instead your
+expectation turned it into something that you felt like you lost now let's think about this for a
+second you lost your expectation you lost your expectation you lost your expectation you lost your
+expectation you lost your expectation you obviously didn't lose
+anything but because you've trained your mind into thinking about an expectation
+your mind is an incredibly powerful thing right you've developed this very thorough story about
+yourself in a future world where that expectation has been met and now you're living in a world where
+that expectation has not been met and because your brain can't really tell the difference between
+imagination and reality you're not able to tell the difference between imagination and reality
+well you actually feel a sense of loss when i first started developer t i actually had the
+opposite experience i didn't really know what was going to happen with the podcast i was very
+fortunate i was uh very lucky that the podcast gained the traction that it did and i had the
+opposite experience it it was my expectation that i would continue working on the podcast for years
+before it ever gained traction or something like that uh but it gained traction very early and so
+something broke my expectation and i was like oh my god i'm gonna lose my mind i'm gonna lose my
+positive way but then as the years went on the previous performance of the podcast i thought i
+was having a rational response as i was looking at the numbers they can look at the listenership
+for example and if one episode dipped below another episode i realized that there was a
+differential between my expectation of how that podcast episode should have performed and how it
+and now i'm trying to rationalize in my mind the reason for the differential just like you might do
+that if you didn't get the promotion well why didn't i get the promotion maybe i'm not good
+enough for the promotion maybe i screwed something up maybe i said something wrong maybe that
+particular project i could have worked extra hours on and maybe that would have impressed
+my boss's boss's boss all of these things are born out of the differential between reality and
+our expectation and so i would spend
+time trying to analyze what kind of content is it that has a better listenership than other content
+what kind of seasonality should i expect there's all of these things that i was trying to calibrate
+my expectations i was trying to change the way that i would expect so i could be more accurate
+with my expectations in the future and this is again a rational thing to do we want to be able
+to predict the future it's one of the things that we really want to do as humans because predicting
+the future allows us to reduce risk and
+also take advantage of benefits that we can see coming down the road so predicting the future is
+a natural tendency to want to uh try to you know evaluate our expectations and tune them so that
+they're better but what i realized is that all of that tuning was not really the core of why i
+started the show to begin with i didn't start this show as crazy as it seems uh purely for the
+pursuit of making the show as crazy as it seems i didn't start the show as crazy as it seems
+podcasts are not the money-making tree that you might expect that they are i've been fortunate
+enough to make some money with this podcast you know that because you've heard episodes in the
+past where i've had sponsors but i didn't start this with that in mind and so the listenership
+of the show started to compete for the core reason i started this podcast in the first place
+it took me a while to find the tagline that you all probably have heard
+but to help developers find clarity perspective and purpose is my core reason now if i can have
+if i can help more developers do that then even better that's great but what i failed to do was
+recognize that the number of engineers listening to the show the number of uh you know audience
+per episode the number of unique downloads i was starting to tune myself towards that number
+rather than allowing that number to be an outcome that i don't have any control over
+i was trying to control that outcome i was trying to align my expectations and correct
+my process to improve the outcomes towards my expectations sometimes this is a reasonable
+thing to do sometimes you should do this but in this case i was losing the plot i was losing the
+core reason why i started the show in the first place so one of the things that i'm doing i've
+been doing it for a couple of years i've been doing it for a couple of years i've been doing it for a couple of years
+now is i'm actively trying to reduce my expectations of developer t and in other areas of my life
+reduce the uh the uh the leverage that my expectations have over my life because the
+truth is in that situation where you didn't get that promotion that you thought you were going to
+get it's very tempting to say you know what that's it i'm throwing in the towel i'm leaving this
+company i'm going to go somewhere that actually respects me and i'm going to go somewhere that
+me you know respects my my experience and it's going to give me the title that i want and this
+is how uh your expectations can stop you from continuing something that you really love doing
+you really love that job but you decided to stop it because your expectations created a differential
+between your reality which by the way you really enjoyed and some other reality that never was true
+when listenership has waxed
+and waned over the years of this show i could have thrown in the towel i could have said you
+know what i can't attract the same number of listeners i can't attract the same kinds of
+sponsors anymore because my listenership is down and therefore it's not worth doing my expectations
+of this show uh have have failed in that case right i i expected to have x number of listeners
+therefore i could get y number of sponsors and i've had less than x therefore the show
+is over and i'm not going to be able to do it again i'm not going to be able to do it again
+no longer worth doing this again is losing the plot right so evaluate those expectations i really
+encourage you to take a few minutes uh whether you're doing it now or later um write down some
+areas of your life where you have maybe in the past year upon reflection you've had some
+expectations that you failed to meet whether it's expectations of yourself maybe it's expectations
+of other people something that was significant
+and try to imagine what it would have been like had you not developed expectations it's very hard
+to do by the way don't don't get me wrong this is not something that's it's easy to do but when we
+develop expectations and then we invest in those expectations that's really where we go wrong
+expectations on their own are kind of a natural byproduct of our thinking brain we have some
+expectation of what will happen but when we start to invest in that expectation we're not going to
+when we start to plan on it we start making changes based on it that's where things can get
+a little bit wonky now briefly i want to make sure that you understand i'm not talking about
+creating plans plans are these longer term expectations we have of what we might do in
+the future instead think about this as the meta layer for example i expect that i will fulfill
+all of my plans
+this is a meta expectation that i have of what's going to happen
+with my planning process my planning is going to be perfect that would be an expectation
+the plan itself is just what you think about doing what you're planning to do is not necessarily an
+expectation of how things are going to go probably the easiest line to draw in the sand is expectations
+are about outcomes that you can't control while plans are more like inputs that you can control
+our expectations are about what you think about doing what you're planning to do and what you're
+doing Dent convert which can quickly your expectations reflect what we believe about the efficacy of our
+planning but our expectations also mask our inability to recognize all of the many factors
+that may impact outcomes beyond our control ultimately i've been incredibly happy to do
+this show and i expect to continue being happy doing this show uh and the way that that that
+I ensure that that will happen is that I focus on that core reason why I started doing the show in
+the first place. And if that disappears, then I will. I will shut the show down, but I don't see
+that disappearing anytime soon. And that's because of all of you. Thanks so much for listening to
+today's episode of Developer Tea. If you'd like to discuss this episode, or if you'd like to just
+chat, come and join us in the Developer Tea Discord community. That's developertea.com
+slash discord. That's free. It always will be free. There's tons of other community members
+in that Discord. Come and check it out, developertea.com slash discord. I'm in there.
+You could send me a message, ask me a question, ask me for advice. I'm there to chat as are other
+members of the community. Thanks so much for listening. And until next time, enjoy your tea.

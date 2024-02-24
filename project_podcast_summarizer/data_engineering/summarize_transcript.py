@@ -23,9 +23,9 @@ def load_system_prompt() -> str:
         return file.read()
 
 def prepare_user_prompt(transcript_path: Path) -> str:
-    with open(transcript_path, "r") as file:
-        transcript = file.readlines()
-    return transcript[0]
+    with open(transcript_path, "r", encoding='utf-8') as file:
+        transcript = file.read()
+    return transcript
 
 def load_model(model_path: Path) -> Llama:
     return Llama(
@@ -38,8 +38,7 @@ def load_model(model_path: Path) -> Llama:
 def prepare_output(
     llm: Llama,
     user_prompt: str,
-    system_prompt: str,
-    grammar: LlamaGrammar | None = None,
+    system_prompt: str
 ) -> CreateChatCompletionResponse | Iterator[CreateChatCompletionStreamResponse]:
     result = llm.create_chat_completion(
         messages=[
@@ -49,7 +48,33 @@ def prepare_output(
         max_tokens=settings.llm.MAX_TOKENS,
         stop=[],
         temperature=settings.llm.TEMPERATURE,
-        grammar=grammar,
+        response_format={
+            "type": "json_object",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "summary": {
+                  "type": "string",
+                  "minLength": 200,
+                  "maxLength": 300,
+                  "description": "A brief summary of the interview content."
+                },
+                "quote": {
+                  "type": "string",
+                  "description": "A quote from the interview subject that captures a key theme of the podcast."
+                },
+                "interview_date": {
+                  "type": "string",
+                  "format": "date",
+                  "description": "The date when the interview was conducted."
+                }
+              },
+              "required": [
+                "summary",
+                "interview_date",
+              ]
+            }
+        }
     )
     return result['choices'][0]['message']['content']
 
@@ -63,7 +88,7 @@ def summarize_transcript(transcript_path: Path, llm: Llama) -> None:
     )
 
 def write_summary_to_file(summary: str, transcript_file_name: Path):
-    summary_file_name = f"{transcript_file_name.stem}_summary.txt"
+    summary_file_name = f"{transcript_file_name.stem}_summary.json"
     summary_path = SUMMARY_DIR / summary_file_name
     with open(summary_path, "w") as file:
         file.write(summary)
