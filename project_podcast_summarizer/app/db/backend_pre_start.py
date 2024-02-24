@@ -1,31 +1,27 @@
 import logging
+import asyncio
 
-from app.db.session import SessionLocal
+from app.db.session import AsyncSessionLocal
 
 from sqlalchemy import text
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-max_tries = 60 * 5  # 5 minutes
-wait_seconds = 1
+async def init() -> None:
+    async with AsyncSessionLocal() as db:
+        try:
+            # Try to create session to check if DB is awake
+            await db.execute(text("SELECT 1"))
+            await db.commit()  # Ensure any transaction is committed.
+        except Exception as e:
+            logger.error(e)
+            raise e
 
-
-def init() -> None:
-    try:
-        db = SessionLocal()
-        # Try to create session to check if DB is awake
-        db.execute(text("SELECT 1"))
-    except Exception as e:
-        logger.error(e)
-        raise e
-
-
-def main() -> None:
+async def main() -> None:
     logger.info("Initializing service")
-    init()
+    await init()
     logger.info("Service finished initializing")
 
-
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
