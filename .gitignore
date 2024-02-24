@@ -175,3 +175,16 @@ temp_test_run_data.json
 
 # course archive
 data/archive
+
+# sqllite
+*.db
+
+# LLMs
+*.gguf
+
+# summaries
+project_podcast_summarizer/data/summaries/*.txt
+project_podcast_summarizer/data/summaries/*.json
+
+# testing
+project_podcast_summarizer/data/transcripts/mini.txt
