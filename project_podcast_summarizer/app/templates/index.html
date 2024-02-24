@@ -23,12 +23,21 @@
                 <h2 class="mb-4 font-semibold tracking-widest uppercase title-font">
                     {{ episode.title }}
                 </h2>
-                <p class="mb-3 text-lg font-normal tracking-wide">
-                    {{ episode.summary.content['summary'] | default('No summary available', true) }}
-                </p>
-                <p class="text-lg font-normal tracking-wide italic">
-                    "{{ episode.summary.content['quote'] | default('No quote available', true) }}"
-                </p>
+                {% if episode.summary %}
+                    <p class="mb-3 text-lg font-normal tracking-wide">
+                        {{ episode.summary.content['summary'] | default('No summary available', true) }}
+                    </p>
+                    <p class="text-lg font-normal tracking-wide italic">
+                        "{{ episode.summary.content['quote'] | default('No quote available', true) }}"
+                    </p>
+                {% else %}
+                    <p class="mb-3 text-lg font-normal tracking-wide">
+                        No summary available.
+                    </p>
+                    <p class="text-lg font-normal tracking-wide italic">
+                        No quote available.
+                    </p>
+                {% endif %}
             </div>
             <div class="w-full lg:w-auto lg:ml-auto p-8">
                 <div class="relative flex flex-col h-full">
