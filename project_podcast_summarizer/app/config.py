@@ -9,14 +9,16 @@ from typing import List, Optional, Union
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 PROMPT_DIR = ROOT / 'data_engineering' / 'prompts'
 TRANSCRIPT_DIR = ROOT / 'data' / 'transcripts'
+SUMMARY_DIR = ROOT / 'data' / 'summaries'
 MODEL_DIR = ROOT / 'data_engineering' / 'models'
 
 class LLMSettings(BaseSettings):
     CONTEXT_WINDOW: int = 512
     N_GPU_LAYERS: int = 1
     MAX_TOKENS: int = 256
-    TEMPERATURE: float = 0.7
-    MODEL_FILE_NAME: str = "tinyllama-1.1b-chat-v0.3.Q2_K.gguf"  # TODO: update
+    TEMPERATURE: float = 0.1
+    MODEL_FILE_NAME: str = "mistral-7b-instruct-v0.2.Q4_K_M.gguf"
+    CHAT_FORMAT: str = 'mistral-instruct'
 
 
 class Settings(BaseSettings):

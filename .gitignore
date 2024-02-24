@@ -181,3 +181,9 @@ data/archive
 
 # LLMs
 *.gguf
+
+# summaries
+project_podcast_summarizer/data/summaries/*.txt
+
+# testing
+project_podcast_summarizer/data/transcripts/mini.txt

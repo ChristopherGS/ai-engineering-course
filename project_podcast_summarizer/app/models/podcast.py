@@ -17,6 +17,7 @@ class Episode(Base):
     podcast_id = Column(Integer, ForeignKey('podcast.id'), nullable=False)
     podcast = relationship("Podcast", back_populates="episodes")
     summary = relationship("Summary", back_populates="episode", uselist=False)
+    transcript = Column(Text, nullable=True)
 
 class Summary(Base):
     __tablename__ = 'summary'
