@@ -25,7 +25,7 @@ def load_system_prompt() -> str:
 def prepare_user_prompt(transcript_path: Path) -> str:
     with open(transcript_path, "r") as file:
         transcript = file.readlines()
-    return transcript
+    return transcript[0]
 
 def load_model(model_path: Path) -> Llama:
     return Llama(

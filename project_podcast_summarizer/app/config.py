@@ -13,7 +13,7 @@ SUMMARY_DIR = ROOT / 'data' / 'summaries'
 MODEL_DIR = ROOT / 'data_engineering' / 'models'
 
 class LLMSettings(BaseSettings):
-    CONTEXT_WINDOW: int = 512
+    CONTEXT_WINDOW: int = 16000
     N_GPU_LAYERS: int = 1
     MAX_TOKENS: int = 256
     TEMPERATURE: float = 0.1
