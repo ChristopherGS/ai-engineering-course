@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Interface</title>
+</head>
+<body>
+    <h2>Batch Chat</h2>
+    <form id="batchForm">
+        <input type="text" id="batchInput" placeholder="Your message here" value="Tell me about Paris">
+        <input type="number" id="batchMaxTokens" placeholder="Max tokens" value="300">
+        <button type="submit">Send</button>
+    </form>
+    <p>Batch Response: <span id="batchResponse"></span></p>
+
+    <h2>Streaming Chat</h2>
+    <form id="streamForm">
+        <input type="text" id="streamInput" placeholder="Your message here" value="Tell me about Paris">
+        <input type="number" id="streamMaxTokens" placeholder="Max tokens" value="300">
+        <button type="submit">Send</button>
+    </form>
+    <p>Stream Response: <span id="streamResponse"></span></p>
+
+    <script>
+        document.getElementById('batchForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const userMessage = document.getElementById('batchInput').value;
+            const maxTokens = document.getElementById('batchMaxTokens').value;
+            const response = await fetch('/inference/batch/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    user_message: userMessage,
+                    max_tokens: parseInt(maxTokens, 10),
+                }),
+            });
+            const data = await response.text();
+            document.getElementById('batchResponse').innerText = data;
+        });
+    </script>
+    <script>
+        document.getElementById('streamForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const userMessage = document.getElementById('streamInput').value;
+            const maxTokens = document.getElementById('streamMaxTokens').value;
+            const reader = document.getElementById('streamResponse');
+            reader.innerText = ''; // Clear previous content
+
+            fetch('/inference/stream/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    user_message: userMessage,
+                    max_tokens: parseInt(maxTokens, 10),
+                }),
+            })
+            .then(response => {
+                const reader = response.body.getReader();
+                return new ReadableStream({
+                    start(controller) {
+                        function push() {
+                            reader.read().then(({ done, value }) => {
+                                if (done) {
+                                    controller.close();
+                                    return;
+                                }
+                                // Convert the Uint8Array to string
+                                const string = new TextDecoder().decode(value);
+                                controller.enqueue(string);
+
+                                // Append streamed content as it arrives
+                                document.getElementById('streamResponse').innerText += string;
+
+                                push();
+                            }).catch(err => {
+                                console.error('Stream reading failed:', err);
+                                controller.error(err);
+                            });
+                        }
+                        push();
+                    }
+                });
+            })
+            .catch(err => {
+                console.error('Fetch error:', err);
+            });
+        });
+    </script>
+
+</body>
+</html>

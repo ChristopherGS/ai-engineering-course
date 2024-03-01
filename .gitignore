@@ -188,3 +188,6 @@ project_podcast_summarizer/data/summaries/*.json
 
 # testing
 project_podcast_summarizer/data/transcripts/mini.txt
+
+# fine tuning
+*.jsonl
