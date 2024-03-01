@@ -42,7 +42,7 @@ async def ui(request: Request) -> Any:
 # Define a Pydantic model for the chat message
 class ChatInput(BaseModel):
     user_message: str = "Tell me about Paris"
-    max_tokens: int = 300
+    max_tokens: int = 100
 
 
 @api_router.post("/inference/batch/", status_code=200)
@@ -61,17 +61,26 @@ async def run_chat_inference(
             },
             {
                 "role": "user",
-                "content": f"{chat_input}",
+                "content": f"{chat_input.user_message}",
             },
         ],
         model=settings.llm.MODEL,
-        max_tokens=settings.llm.MAX_TOKENS,
+        max_tokens=chat_input.max_tokens,
+        temperature=settings.llm.TEMPERATURE,
     )
 
     if not chat_completion:
         raise HTTPException(status_code=404, detail="Chat completion empty")
 
-    return chat_completion.choices[0].message.content.strip()
+    cleaned_response = chat_completion.choices[0].message.content.strip()
+    cleaned_response = cleaned_response.replace(
+        "\\n", "\n"
+    )  # Replace escaped new lines with actual new line characters
+    cleaned_response = cleaned_response.replace(
+        "\\", ""
+    )  # Remove any remaining backslashes
+
+    return cleaned_response
 
 
 async def stream_generator(response):
@@ -102,6 +111,7 @@ async def run_chat_inference_stream(
         stream=True,
         model=settings.llm.MODEL,
         max_tokens=chat_input.max_tokens,
+        temperature=settings.llm.TEMPERATURE,
     )
     return StreamingResponse(stream_generator(response), media_type="text/event-stream")
 
