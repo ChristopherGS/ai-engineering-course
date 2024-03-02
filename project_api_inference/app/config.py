@@ -20,7 +20,7 @@ class LLMSettings(BaseSettings):
     MAX_TOKENS: int = 1000
     TEMPERATURE: float = 0.8
     MODEL: str = "mistralai/Mixtral-8x7B-Instruct-v0.1"
-    CHAT_FORMAT: str = "mistral-instruct"
+    BASE_URL: str = "https://api.together.xyz"
     TOGETHER_API_KEY: str  # Will be picked up from environment variables
 
 

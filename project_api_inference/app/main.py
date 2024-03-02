@@ -4,7 +4,7 @@ from typing import Any, AsyncGenerator
 from fastapi import FastAPI, APIRouter, HTTPException, Depends, Request
 from fastapi.responses import StreamingResponse
 from fastapi.templating import Jinja2Templates
-from openai import AsyncOpenAI
+from openai import AsyncOpenAI, AsyncStream
 from pydantic import BaseModel
 
 from app import deps  # Assuming this is correctly implemented elsewhere
@@ -94,12 +94,12 @@ async def run_chat_inference(
     return cleaned_response
 
 
-async def stream_generator(response: AsyncGenerator) -> AsyncGenerator[str, None]:
+async def stream_generator(response: AsyncStream) -> AsyncGenerator[str, None]:
     """
     Generates streaming content from the AI model's response.
 
     Args:
-        response (AsyncGenerator): The streaming response from the AI model.
+        response (AsyncStream): The streaming response from the AI model.
 
     Yields:
         str: Current content chunk from the AI model's response.

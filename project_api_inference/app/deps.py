@@ -16,6 +16,6 @@ async def get_llm_client() -> AsyncGenerator[AsyncOpenAI, None]:
     """
     client = AsyncOpenAI(
         api_key=settings.llm.TOGETHER_API_KEY,
-        base_url="https://api.together.xyz",
+        base_url=settings.llm.BASE_URL,
     )
     yield client
