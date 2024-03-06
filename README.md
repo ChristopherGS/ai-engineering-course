@@ -9,7 +9,9 @@ Videos explaining how everything works can be found in the [course on gumroad](h
 - Ensure you have git installed
 - (Optional but recommended): Create a virtual environment
 - Run `pip install -r requirements.txt`
-- Get mistral model `wget https://huggingface.co/wernerpj1/mistral-7b-instruct-v0.2.Q4_K_M.gguf`
+- Get mistral model Inside `data` directory
+  - `cd data`
+  - `wget https://huggingface.co/wernerpj1/mistral-7b-instruct-v0.2.Q4_K_M.gguf`
 
 ## Part 2 Setup
 
