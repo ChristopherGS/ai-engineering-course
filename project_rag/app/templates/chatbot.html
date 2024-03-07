@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Interface</title>
+    <!-- Include Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen justify-between">
+    <header class="text-center py-10">
+        <h1 class="text-5xl font-semibold mb-2 text-blue-400">Generic Chatbot</h1>
+        <p class="text-xl text-blue-200">Batch vs. Stream...</p>
+    </header>
+
+    <main class="mb-10">
+        <section class="mb-20"> <!-- Increased bottom margin -->
+            <div class="max-w-2xl mx-auto px-4">
+                <h2 class="text-3xl font-bold mb-6 text-blue-300">Streaming Chat</h2>
+                <form id="streamForm" class="mb-6">
+                    <input type="text" name="user_message" placeholder="Your message here" value="Tell me about Paris"
+                        class="w-full p-3 rounded bg-gray-700 mb-4 focus:ring-blue-500 focus:border-blue-500">
+                    <input type="number" name="max_tokens" placeholder="Max tokens" value="300"
+                        class="w-full p-3 rounded bg-gray-700 mb-4 focus:ring-blue-500 focus:border-blue-500">
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded transition duration-200">
+                        Send
+                    </button>
+                </form>
+                <p class="text-lg bg-gray-800 p-3 rounded">Stream Response: <span id="streamResponse" class="text-green-400"></span></p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 py-6">
+        <div class="text-center">
+            <p class="text-sm text-gray-400">
+                © 2024 Building AI Applications —
+                <a href="https://twitter.com/chrissamiullah" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300" target="_blank">@ChrisSamiullah</a>
+            </p>
+        </div>
+    </footer>
+    <script>
+        async function handleSubmit(e, isStreaming = false) {
+            e.preventDefault();
+            const form = e.target;
+            const formData = new FormData(form);
+            const userMessage = formData.get('user_message');
+            const maxTokens = parseInt(formData.get('max_tokens'), 10);
+            const endpoint = isStreaming ? '/inference/stream/' : '/inference/batch/';
+            const responseContainerId = isStreaming ? 'streamResponse' : 'batchResponse';
+
+            // Clear previous response when "Send" is clicked again
+            if (isStreaming) {
+                document.getElementById(responseContainerId).innerText = '';
+            }
+
+            try {
+                const response = await fetch(endpoint, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ user_message: userMessage, max_tokens: maxTokens }),
+                });
+
+                if (isStreaming) {
+                    const reader = response.body.getReader();
+                    readStream(reader, responseContainerId);
+                } else {
+                    const data = await response.text();
+                    document.getElementById(responseContainerId).innerText = data;
+                }
+            } catch (err) {
+                console.error('Fetch error:', err);
+            }
+        }
+
+        async function readStream(reader, containerId) {
+            const decoder = new TextDecoder();
+            let result;
+            while (true) {
+                result = await reader.read();
+                if (result.done) break;
+                const chunk = decoder.decode(result.value, {stream: true});
+                document.getElementById(containerId).innerText += chunk;
+            }
+        }
+        document.getElementById('streamForm').addEventListener('submit', (e) => handleSubmit(e, true));
+    </script>
+
+</body>
+</html>
