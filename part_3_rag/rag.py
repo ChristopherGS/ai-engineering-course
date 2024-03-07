@@ -19,7 +19,7 @@ from llama_index.embeddings import HuggingFaceEmbedding
 from llama_index.llms import LlamaCPP
 from transformers import AutoTokenizer
 
-from shared.settings import DATA_DIR
+from shared.settings import DATA_DIR, MISTRAL_7B_FILE
 
 SYSTEM_PROMPT_TEXT = "You are bot that answers questions about podcast transcripts."
 
@@ -101,9 +101,10 @@ def main():
 
     user_prompt = ChatMessage(
         role=MessageRole.USER,
-        content="According to Dylan Patel, what don't people understand about the semiconductor supply chain?",
+        # content="According to Dylan Patel, what don't people understand about the semiconductor supply chain?",
+        content="What is Kevin's favorite budgetting software?"
     )
-    llm = load_llm(model_path=DATA_DIR / "mistral-7b-instruct-v0.2.Q4_K_M.gguf")
+    llm = load_llm(model_path=DATA_DIR / MISTRAL_7B_FILE)
     embedding_model = load_embedding_model()
     no_rag_result = ChatResponse = run_inference(
         llm=llm, use_rag=False, messages=[system_prompt, user_prompt]
