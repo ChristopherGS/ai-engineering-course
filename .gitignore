@@ -191,3 +191,6 @@ project_podcast_summarizer/data/transcripts/mini.txt
 
 # fine tuning
 *.jsonl
+
+# Projects
+project_rag/app/index_store/*.json
