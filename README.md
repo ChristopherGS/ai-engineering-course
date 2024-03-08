@@ -12,6 +12,8 @@ Videos explaining how everything works can be found in the [course on gumroad](h
 - Get mistral model Inside `data` directory
   - `cd data`
   - `wget https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q4_K_M.gguf`
+  - Global tokenizer: AutoTokenizer
+  - ![1709874690461](image/README/1709874690461.png)
 
 ## Part 2 Setup
 
