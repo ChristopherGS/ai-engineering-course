@@ -1,3 +1,4 @@
+from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Any, AsyncGenerator
 
@@ -7,11 +8,15 @@ from openai import AsyncOpenAI, AsyncStream
 from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi.responses import StreamingResponse
 from llama_index.llms.openai_like import OpenAILike
+from llama_index.core import StorageContext, load_index_from_storage, VectorStoreIndex
+from llama_index.core.base.response.schema import StreamingResponse as LlamaStreamingResponse
+from llama_index.core.indices.base import BaseIndex, BaseQueryEngine
+from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 
 from app import crud
 from app import deps
 from app.schemas.podcast import Episode
-from app.config import settings
+from app.config import settings, INDEX_DIR
 from app.schemas.chatbot import ChatInput
 
 # Project Directories
@@ -19,7 +24,30 @@ ROOT = Path(__file__).resolve().parent.parent
 BASE_PATH = Path(__file__).resolve().parent
 TEMPLATES = Jinja2Templates(directory=str(BASE_PATH / "templates"))
 
-app = FastAPI(title="Podcast Summarizer")
+
+INDEX = {}
+
+async def load_rag_index(index_dir: Path) -> BaseIndex:
+    storage_context = StorageContext.from_defaults(persist_dir=index_dir)
+
+    embed_model = HuggingFaceEmbedding(model_name="WhereIsAI/UAE-Large-V1")
+    return load_index_from_storage(
+        storage_context, embed_model=embed_model)
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # The first part of the function, before the yield,
+    # will be executed before the application starts.
+    INDEX['rag_index'] = await load_rag_index(index_dir=INDEX_DIR)
+    yield
+
+    # And the part after the yield will be
+    # executed after the application has finished.
+    INDEX.clear()
+
+
+app = FastAPI(title="Podcast Summarizer", lifespan=lifespan)
 api_router = APIRouter()
 
 
@@ -54,7 +82,7 @@ async def fetch_episode(
     return result
 
 
-async def stream_generator(response: AsyncStream) -> AsyncGenerator[str, None]:
+async def stream_generator(response: LlamaStreamingResponse) -> AsyncGenerator[str, None]:
     """
     Generates streaming content from the AI model's response.
 
@@ -64,30 +92,24 @@ async def stream_generator(response: AsyncStream) -> AsyncGenerator[str, None]:
     Yields:
         str: Current content chunk from the AI model's response.
     """
-    async for chunk in response:
-        current_content = chunk.choices[0].delta.content
-        yield current_content
+    for chunk in response.response_gen:
+        yield chunk
 
+from llama_index.core import Settings
+
+# set number of output tokens
+Settings.num_output = 512
 
 @api_router.post("/inference/stream/", status_code=200, response_model=str)
 async def run_chat_inference_stream(
     chat_input: ChatInput,
     llm: OpenAILike = Depends(deps.get_llm),
 ) -> Any:
+    index: VectorStoreIndex = INDEX["rag_index"]
 
-    # TODO: Figure out fastapi startup for index
-    # could just use a cache and dependency injection
-    # query_engine = request.app.state.llama_index.as_query_engine(llm=llm)
-    response = await llm_client.chat.completions.create(
-        messages=[
-            {"role": "system", "content": "You are an AI assistant"},
-            {"role": "user", "content": chat_input.user_message},
-        ],
-        stream=True,
-        model=settings.llm.MODEL,
-        max_tokens=chat_input.max_tokens,
-        temperature=settings.llm.TEMPERATURE,
-    )
+    query_engine: BaseQueryEngine = index.as_query_engine(
+        streaming=True, llm=llm)
+    response = query_engine.query(chat_input.user_message)
     return StreamingResponse(stream_generator(response), media_type="text/event-stream")
 
 

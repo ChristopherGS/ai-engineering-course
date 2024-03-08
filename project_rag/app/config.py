@@ -13,12 +13,16 @@ TRANSCRIPT_DIR = ROOT / 'data' / 'transcripts'
 SUMMARY_DIR = ROOT / 'data' / 'summaries'
 MODEL_DIR = ROOT / 'data_engineering' / 'models'
 
+# New
+INDEX_DIR = ROOT / "app" / "index_store"
+
+
 class LLMSettings(BaseSettings):
     CONTEXT_WINDOW: int = 16000
     N_GPU_LAYERS: int = 1
     MAX_TOKENS: int = 4096
     TEMPERATURE: float = 0.8
-    MODEL = "mistralai/Mixtral-8x7B-Instruct-v0.1"
+    MODEL: str = "mistralai/Mixtral-8x7B-Instruct-v0.1"
     TOGETHER_API_KEY: str  # picked up from environment
 
 
