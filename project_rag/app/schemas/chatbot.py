@@ -7,8 +7,6 @@ class ChatInput(BaseModel):
 
     Attributes:
         user_message (str): The user's message to the AI model.
-        max_tokens (int): The maximum number of tokens to generate in the response.
     """
 
-    user_message: str = "Tell me about Paris"
-    max_tokens: int = 100
+    user_message: str = "Tell me about Developer Tea"
