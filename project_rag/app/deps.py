@@ -20,16 +20,6 @@ async def get_db() -> AsyncGenerator[AsyncSession, None]:
         yield db
 
 def get_llm() -> TogetherLLM:
-    """
-    Configures and returns a TogetherLLM instance.
-
-    This function initializes a TogetherLLM object with configuration parameters specified in the application settings.
-    It sets up the Large Language Model (LLM) with the appropriate model, API key, maximum token count, and context window
-    size for use in processing language-based tasks.
-
-    Returns:
-        TogetherLLM: An instance of TogetherLLM configured for language model operations.
-    """
     return TogetherLLM(
         model=settings.llm.MODEL,
         api_key=settings.llm.TOGETHER_API_KEY,

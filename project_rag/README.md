@@ -21,7 +21,7 @@ It is because you have not appended the repo root directory to your PYTHONPATH e
 
 ## Code New Additions
 - RAG index generation (offline)
-- New endpoint with chat inference (online)
+- New endpoint with chat inference (online) (incl. new schema)
 - New chatbot template (online)
 - RAG capabilities for this endpoint (online + deps.py)
 - Split out config and New evar
