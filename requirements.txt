@@ -1,5 +1,7 @@
 llama-cpp-python==0.2.38
-llama-index==0.9.39
+llama-index>=0.10.0,<0.11.0
+llama-index-embeddings-huggingface>=0.1.4,<0.2.0
+llama-index-llms-llama-cpp>=0.1.3,<0.2.0
 transformers==4.37.1
 deepeval==0.20.55
 pytest==8.0.0
